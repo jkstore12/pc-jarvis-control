@@ -1,6 +1,9 @@
 import "dotenv/config";
 import { z } from "zod";
 
+const optionalNonEmptyString = z.preprocess((value) => (value === "" ? undefined : value), z.string().optional());
+const optionalUrl = z.preprocess((value) => (value === "" ? undefined : value), z.string().url().optional());
+
 const schema = z.object({
   NODE_ENV: z.string().default("development"),
   PORT: z.coerce.number().default(4000),
@@ -17,9 +20,9 @@ const schema = z.object({
   ADMIN_PASSWORD_HASH: z.string().min(20),
   AGENT_SECRET: z.string().min(24, "AGENT_SECRET must have at least 24 characters."),
   DANGEROUS_CONFIRMATION_PHRASE: z.string().default("CONFIRMAR"),
-  SUPABASE_URL: z.string().url().optional(),
-  SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
-  TELEGRAM_BOT_TOKEN: z.string().optional(),
+  SUPABASE_URL: optionalUrl,
+  SUPABASE_SERVICE_ROLE_KEY: optionalNonEmptyString,
+  TELEGRAM_BOT_TOKEN: optionalNonEmptyString,
   TELEGRAM_ALLOWED_USER_IDS: z.string().default("")
 });
 
