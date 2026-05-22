@@ -5,4 +5,5 @@ dist
 .DS_Store
 coverage
 *.tsbuildinfo
+logs
 apps/agent/screenshots
