@@ -1,5 +1,9 @@
-import "dotenv/config";
+import path from "node:path";
+import { config } from "dotenv";
 import { z } from "zod";
+
+config();
+config({ path: path.resolve(process.cwd(), "apps/agent/.env"), override: false });
 
 const schema = z.object({
   SERVER_URL: z.string().url(),
