@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: pc-jarvis-control
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: STATIC_WEB_DIR
+        value: /app/apps/web/dist
+      - key: TRUST_PROXY
+        value: "true"
+      - key: CORS_ORIGIN
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD_HASH
+        sync: false
+      - key: AGENT_SECRET
+        sync: false
+      - key: DANGEROUS_CONFIRMATION_PHRASE
+        value: CONFIRMAR
+      - key: LOGIN_RATE_LIMIT_WINDOW_MS
+        value: 900000
+      - key: LOGIN_RATE_LIMIT_MAX
+        value: 10
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_ALLOWED_USER_IDS
+        sync: false
